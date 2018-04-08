@@ -1,10 +1,8 @@
 package com.wqy.springmvc.controllers;
 
-import com.sun.org.apache.regexp.internal.RE;
 import com.wqy.springmvc.entities.DemoObj;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
