@@ -5,6 +5,15 @@ public class DemoObj {
     private String name;
     private String gender;
 
+    public DemoObj() {
+    }
+
+    public DemoObj(long id, String name, String gender) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+    }
+
     public long getId() {
         return id;
     }
