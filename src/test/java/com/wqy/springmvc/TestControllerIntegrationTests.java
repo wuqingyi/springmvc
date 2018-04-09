@@ -19,17 +19,11 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {MyConfig.class})
 @WebAppConfiguration(value = "src/main/resources")
-public class TestControllerIntegrationTests {
+public class TestControllerIntegrationTests extends MockMvcResultMatchers {
     private MockMvc mockMvc;
 
     @Autowired
     WebApplicationContext wac;
-
-    @Autowired
-    MockHttpSession session;
-
-    @Autowired
-    MockHttpServletRequest request;
 
     @Before
     public void setup(){
@@ -39,10 +33,18 @@ public class TestControllerIntegrationTests {
     @Test
     public void testNormalController() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("index"))
-                .andExpect(MockMvcResultMatchers.forwardedUrl("/WEB-INF/classes/views/index.jsp"))
-                .andExpect(MockMvcResultMatchers.model().attribute("msg", "hello"));
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"))
+                .andExpect(forwardedUrl("/WEB-INF/classes/views/index.jsp"))
+                .andExpect(model().attribute("msg", "hello"));
+    }
+
+    @Test
+    public void testRestController() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/anno/requestParam").param("id", "1"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/plain;charset=ISO-8859-1"))
+                .andExpect(content().string(""));
     }
 
 }
